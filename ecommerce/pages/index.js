@@ -1,15 +1,22 @@
 import React from 'react';
 import { client } from '../lib/client';
+import Head from 'next/head';
 import { Product, FooterBanner, HeroBanner } from '../components';
 
 // Move this code to main file:
 // Video: https://www.youtube.com/watch?v=4mOkFXyxfsU
 // Code: https://github.com/adrianhajdin/ecommerce_sanity_stripe
+// How To Add A Title Tag To A Next.js Website: https://coderrocketfuel.com/article/how-to-add-a-title-tag-to-a-next-js-website
+// Add Favicon Images To A Next.js Website: https://coderrocketfuel.com/article/add-favicon-images-to-a-next-js-website
+
 // Start command: npm run dev (inside 'ecommerce' folder)
 
 const Home = ({ products, bannerData }) => {
   return (
     <>
+      <Head>
+        <title>eCommerce Application</title>
+      </Head>
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
       {/* {console.log(bannerData)} */}
       <div className='products-heading'>
@@ -17,7 +24,9 @@ const Home = ({ products, bannerData }) => {
         <p>Speakers of many variations</p>
       </div>
       <div className='products-container'>
-        {products?.map((product) => product.name)}
+        {products?.map((product) => (
+          <Product key={product._id} product={product} />
+        ))}
       </div>
       <FooterBanner />
     </>
