@@ -1,22 +1,25 @@
 import React from 'react'
 import Link from 'next/link'
+import { urlFor } from '../lib/client'
 
-// STOPPED at 40:25
+// STOPPED at 53:00
+// Start command: npm run dev (inside 'ecommerce' folder)
 
-const HeroBanner = () => {
+const HeroBanner = ({heroBanner}) => {
   return (
     <div className='hero-banner-container'>
         <div>
-            <p className='beats-solo'>SMALL TEXT</p>
-            <h3>MID TEXT</h3>
-            <img className='hero-banner-image' src="" alt="Headphones" />
+            <p className='beats-solo'>{heroBanner.smallText}</p>
+            <h3>{heroBanner.midText}</h3>
+            <h1>{heroBanner.largeText1}</h1>
+            <img className='hero-banner-image' src={urlFor(heroBanner.image)} alt="Headphones" />
             <div>
-                <Link href="/product/id">
-                    <button type='button'>BUTTON TEXT</button>
+                <Link href={`/product/${heroBanner.product}`}>
+                    <button type='button'>{heroBanner.buttonText}</button>
                 </Link>
                 <div className='desc'>
                     <h5>Description</h5>
-                    <p>DESCRIPTION</p>
+                    <p>{heroBanner.desc}</p>
                 </div>
             </div>
         </div>

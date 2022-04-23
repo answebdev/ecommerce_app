@@ -1,4 +1,5 @@
 import React from 'react';
+import { client } from '../lib/client';
 import { Product, FooterBanner, HeroBanner } from '../components';
 
 // Move this code to main file:
@@ -6,20 +7,40 @@ import { Product, FooterBanner, HeroBanner } from '../components';
 // Code: https://github.com/adrianhajdin/ecommerce_sanity_stripe
 // Start command: npm run dev (inside 'ecommerce' folder)
 
-const Home = () => {
+const Home = ({ products, bannerData }) => {
   return (
     <>
-      <HeroBanner />
+      <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
+      {/* {console.log(bannerData)} */}
       <div className='products-heading'>
         <h2>Best-Selling Products</h2>
         <p>Speakers of many variations</p>
       </div>
       <div className='products-container'>
-        {['Product 1', 'Product 2'].map((product) => product)}
+        {products?.map((product) => product.name)}
       </div>
       <FooterBanner />
     </>
   );
+};
+
+// Fetch data
+// This is Next.js, so use 'getServerSideProps' instead of 'useEffect', as in React
+export const getServerSideProps = async () => {
+  // Create a Sanity query ('*' means fetch all):
+  // grab all prodcuts from the Sanity dashboard
+  const query = '*[_type == "product"]';
+  const products = await client.fetch(query);
+
+  // Fetch data for the banner
+  const bannerQuery = '*[_type == "banner"]';
+  const bannerData = await client.fetch(bannerQuery);
+
+  // Return the data so that we can we can populate the function above with the data -
+  // be sure to pass these as props up above
+  return {
+    props: { products, bannerData },
+  };
 };
 
 export default Home;
