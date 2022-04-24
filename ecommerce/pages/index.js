@@ -1,6 +1,6 @@
 import React from 'react';
 import { client } from '../lib/client';
-import Head from 'next/head';
+// import Head from 'next/head';
 import { Product, FooterBanner, HeroBanner } from '../components';
 
 // Move this code to main file:
@@ -14,9 +14,9 @@ import { Product, FooterBanner, HeroBanner } from '../components';
 const Home = ({ products, bannerData }) => {
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>eCommerce Application</title>
-      </Head>
+      </Head> */}
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
       {/* {console.log(bannerData)} */}
       <div className='products-heading'>

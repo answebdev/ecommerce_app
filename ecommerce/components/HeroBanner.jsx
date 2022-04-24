@@ -2,9 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import { urlFor } from '../lib/client'
 
-// STOPPED at 53:00
-// Start command: npm run dev (inside 'ecommerce' folder)
-
 const HeroBanner = ({heroBanner}) => {
   return (
     <div className='hero-banner-container'>
