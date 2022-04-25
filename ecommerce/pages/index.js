@@ -6,8 +6,6 @@ import { Product, FooterBanner, HeroBanner } from '../components';
 // Move this code to main file:
 // Video: https://www.youtube.com/watch?v=4mOkFXyxfsU
 // Code: https://github.com/adrianhajdin/ecommerce_sanity_stripe
-// How To Add A Title Tag To A Next.js Website: https://coderrocketfuel.com/article/how-to-add-a-title-tag-to-a-next-js-website
-// Add Favicon Images To A Next.js Website: https://coderrocketfuel.com/article/add-favicon-images-to-a-next-js-website
 
 // Start command: npm run dev (inside 'ecommerce' folder)
 
@@ -37,7 +35,7 @@ const Home = ({ products, bannerData }) => {
 // This is Next.js, so use 'getServerSideProps' instead of 'useEffect', as in React
 export const getServerSideProps = async () => {
   // Create a Sanity query ('*' means fetch all):
-  // grab all prodcuts from the Sanity dashboard
+  // grab all products from the Sanity dashboard
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
 
