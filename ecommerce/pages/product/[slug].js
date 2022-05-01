@@ -14,12 +14,15 @@ import {
   AiOutlineStar,
 } from 'react-icons/ai';
 import { Product } from '../../components';
+import { useStateContext } from '../../context/StateContext';
 
 const ProductDetails = ({ product, products }) => {
   // Destructure the values from the product
   const { image, name, details, price } = product;
 
   const [index, setIndex] = useState(0);
+
+  const { decQty, incQty, qty, onAdd } = useStateContext();
 
   // STOPPED at 1:42:10
   // Start command: npm run dev (inside 'ecommerce' folder)
@@ -63,21 +66,23 @@ const ProductDetails = ({ product, products }) => {
           <p>{details}</p>
           <p className='price'>${price}</p>
           <div className='quantity'>
-            <h3>Quantity</h3>
+            <h3>Quantity: </h3>
             <p className='quantity-desc'>
-              <span className='minus' onClick=''>
+              <span className='minus' onClick={decQty}>
                 <AiOutlineMinus />
               </span>
-              <span className='num' onClick=''>
-                0
-              </span>
-              <span className='plus' onClick=''>
+              <span className='num'>{qty}</span>
+              <span className='plus' onClick={incQty}>
                 <AiOutlinePlus />
               </span>
             </p>
           </div>
           <div className='buttons'>
-            <button type='button' className='add-to-cart' onClick=''>
+            <button
+              type='button'
+              className='add-to-cart'
+              onClick={() => onAdd(product, qty)}
+            >
               Add to Cart
             </button>
             <button type='button' className='buy-now' onClick=''>
