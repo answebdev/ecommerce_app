@@ -24,7 +24,7 @@ const ProductDetails = ({ product, products }) => {
 
   const { decQty, incQty, qty, onAdd } = useStateContext();
 
-  // STOPPED at 2:36:25
+  // STOPPED at 3:09:03
   // Start command: npm run dev (inside 'ecommerce' folder)
 
   return (
