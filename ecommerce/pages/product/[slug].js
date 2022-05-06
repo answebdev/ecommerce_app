@@ -16,16 +16,18 @@ import {
 import { Product } from '../../components';
 import { useStateContext } from '../../context/StateContext';
 
+// Start command: npm run dev (inside 'ecommerce' folder)
+
 const ProductDetails = ({ product, products }) => {
   // Destructure the values from the product
   const { image, name, details, price } = product;
-
   const [index, setIndex] = useState(0);
+  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
 
-  const { decQty, incQty, qty, onAdd } = useStateContext();
-
-  // STOPPED at 3:09:03
-  // Start command: npm run dev (inside 'ecommerce' folder)
+  const handleBuyNow = () => {
+    onAdd(product, qty);
+    setShowCart(true);
+  };
 
   return (
     <div>
@@ -50,6 +52,7 @@ const ProductDetails = ({ product, products }) => {
             ))}
           </div>
         </div>
+
         <div className='product-detail-desc'>
           <h1>{name}</h1>
           <div className='reviews'>
@@ -62,11 +65,11 @@ const ProductDetails = ({ product, products }) => {
             </div>
             <p>(20)</p>
           </div>
-          <h4>Details</h4>
+          <h4>Details: </h4>
           <p>{details}</p>
           <p className='price'>${price}</p>
           <div className='quantity'>
-            <h3>Quantity: </h3>
+            <h3>Quantity:</h3>
             <p className='quantity-desc'>
               <span className='minus' onClick={decQty}>
                 <AiOutlineMinus />
@@ -85,12 +88,13 @@ const ProductDetails = ({ product, products }) => {
             >
               Add to Cart
             </button>
-            <button type='button' className='buy-now' onClick=''>
+            <button type='button' className='buy-now' onClick={handleBuyNow}>
               Buy Now
             </button>
           </div>
         </div>
       </div>
+
       <div className='maylike-products-wrapper'>
         <h2>You may also like</h2>
         <div className='marquee'>
